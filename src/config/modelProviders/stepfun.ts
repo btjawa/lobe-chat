@@ -37,10 +37,10 @@ const Stepfun: ModelProviderCard = {
   modelList: { showModelFetcher: true },
   name: '阶跃星辰',
   proxyUrl: {
-    placeholder: "https://api.stepfun.com/v1",
     desc: `除默认地址外，必须包含 http(s)://
 由于 https://api.stepfun.com/v1/chat/completions 目前有 CORS 跨域问题
-因此客户端请求模式暂时禁用`
+因此客户端请求模式暂时禁用`,
+    placeholder: "https://api.stepfun.com/v1",
   }
 };
 

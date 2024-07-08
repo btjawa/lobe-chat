@@ -99,12 +99,11 @@ export class LobeMinimaxAI implements LobeRuntimeAI {
         });
       }
       const body = await response.json();
-      baseURL = baseURL + (body?.base_resp?.status_code == 1004 ? '/text/chatcompletion_v2' : '/chat/completions');  
+
+      return new LobeMinimaxAI(apiKey, baseURL + (body?.base_resp?.status_code.toString() === "1004" ? '/text/chatcompletion_v2' : '/chat/completions'));
     } catch {
       throw invalidMinimaxAPIKey;
     }
-
-    return new LobeMinimaxAI(apiKey, baseURL || DEFAULT_BASE_URL);;
   }
 
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions): Promise<Response> {

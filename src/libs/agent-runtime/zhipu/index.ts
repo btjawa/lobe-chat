@@ -57,7 +57,7 @@ export class LobeZhipuAI implements LobeRuntimeAI {
         });
       }
       const body = await response.json();
-      token = body?.error?.code == 1001 ? await generateApiToken(apiKey) : apiKey;
+      token = body?.error?.code.toString() === "1001" ? await generateApiToken(apiKey) : apiKey;
     } catch {
       throw invalidZhipuAPIKey;
     }
