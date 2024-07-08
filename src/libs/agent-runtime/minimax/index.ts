@@ -23,6 +23,8 @@ interface MinimaxBaseResponse {
 
 type MinimaxResponse = Partial<OpenAI.ChatCompletionChunk> & MinimaxBaseResponse;
 
+const DEFAULT_BASE_URL = 'https://api.minimax.chat/v1';
+
 function throwIfErrorResponse(data: MinimaxResponse) {
   // error status code
   // https://www.minimaxi.com/document/guides/chat-model/pro/api?id=6569c85948bc7b684b30377e#3.1.3%20%E8%BF%94%E5%9B%9E(response)%E5%8F%82%E6%95%B0
@@ -62,16 +64,52 @@ function parseMinimaxResponse(chunk: string): MinimaxResponse | undefined {
 
 export class LobeMinimaxAI implements LobeRuntimeAI {
   apiKey: string;
+  baseURL: string;
 
-  constructor({ apiKey }: { apiKey?: string }) {
+  constructor(apiKey: string, baseURL: string) {
     if (!apiKey) throw AgentRuntimeError.createError(AgentRuntimeErrorType.InvalidProviderAPIKey);
 
     this.apiKey = apiKey;
+    this.baseURL = baseURL || DEFAULT_BASE_URL;
+  }
+
+  static async fromBaseURL({ apiKey, baseURL = DEFAULT_BASE_URL }: { apiKey?: string, baseURL?: string | null | undefined }): Promise<LobeMinimaxAI> {
+    const invalidMinimaxAPIKey = AgentRuntimeError.createError(
+      AgentRuntimeErrorType.InvalidProviderAPIKey,
+    );
+
+    if (!apiKey) throw invalidMinimaxAPIKey;
+
+    try {
+      const response = await fetch(baseURL + '/text/chatcompletion_v2', {
+        body: JSON.stringify({}),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: "POST"
+      });
+      if (!response.body) {
+        throw AgentRuntimeError.chat({
+          error: {
+            status: response.status,
+            statusText: response.statusText,
+          },
+          errorType: AgentRuntimeErrorType.ProviderBizError,
+          provider: ModelProvider.ZhiPu,
+        });
+      }
+      const body = await response.json();
+      baseURL = baseURL + (body?.base_resp?.status_code == 1004 ? '/text/chatcompletion_v2' : '/chat/completions');  
+    } catch {
+      throw invalidMinimaxAPIKey;
+    }
+
+    return new LobeMinimaxAI(apiKey, baseURL || DEFAULT_BASE_URL);;
   }
 
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions): Promise<Response> {
     try {
-      const response = await fetch('https://api.minimax.chat/v1/text/chatcompletion_v2', {
+      const response = await fetch(this.baseURL, {
         body: JSON.stringify(this.buildCompletionsParams(payload)),
         headers: {
           'Authorization': `Bearer ${this.apiKey}`,

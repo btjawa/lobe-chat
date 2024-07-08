@@ -39,7 +39,25 @@ export class LobeZhipuAI implements LobeRuntimeAI {
     let token: string;
 
     try {
-      token = await generateApiToken(apiKey);
+      const response = await fetch(baseURL || DEFAULT_BASE_URL, {
+        body: JSON.stringify({}),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: "POST"
+      });
+      if (!response.body) {
+        throw AgentRuntimeError.chat({
+          error: {
+            status: response.status,
+            statusText: response.statusText,
+          },
+          errorType: AgentRuntimeErrorType.ProviderBizError,
+          provider: ModelProvider.ZhiPu,
+        });
+      }
+      const body = await response.json();
+      token = body?.error?.code == 1001 ? await generateApiToken(apiKey) : apiKey;
     } catch {
       throw invalidZhipuAPIKey;
     }

@@ -53,6 +53,9 @@ const Qwen: ModelProviderCard = {
   id: 'qwen',
   modelList: { showModelFetcher: true },
   name: 'Qwen',
+  proxyUrl: {
+    placeholder: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  }
 };
 
 export default Qwen;

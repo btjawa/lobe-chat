@@ -21,6 +21,9 @@ const DeepSeek: ModelProviderCard = {
   id: 'deepseek',
   modelList: { showModelFetcher: true },
   name: 'DeepSeek',
+  proxyUrl: {
+    placeholder: "https://api.deepseek.com/v1"
+  }
 };
 
 export default DeepSeek;

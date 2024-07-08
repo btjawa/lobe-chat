@@ -183,7 +183,7 @@ class AgentRuntime {
       }
 
       case ModelProvider.Minimax: {
-        runtimeModel = new LobeMinimaxAI(params.minimax ?? {});
+        runtimeModel = await LobeMinimaxAI.fromBaseURL(params.minimax ?? {});
         break;
       }
 

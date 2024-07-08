@@ -27,9 +27,11 @@ export const getLLMConfig = () => {
 
       ENABLED_ZHIPU: z.boolean(),
       ZHIPU_API_KEY: z.string().optional(),
+      ZHIPU_PROXY_URL: z.string().optional(),
 
       ENABLED_DEEPSEEK: z.boolean(),
       DEEPSEEK_API_KEY: z.string().optional(),
+      DEEPSEEK_PROXY_URL: z.string().optional(),
 
       ENABLED_GOOGLE: z.boolean(),
       GOOGLE_API_KEY: z.string().optional(),
@@ -49,6 +51,7 @@ export const getLLMConfig = () => {
 
       ENABLED_MINIMAX: z.boolean(),
       MINIMAX_API_KEY: z.string().optional(),
+      MINIMAX_PROXY_URL: z.string().optional(),
 
       ENABLED_MISTRAL: z.boolean(),
       MISTRAL_API_KEY: z.string().optional(),
@@ -79,9 +82,11 @@ export const getLLMConfig = () => {
 
       ENABLED_QWEN: z.boolean(),
       QWEN_API_KEY: z.string().optional(),
+      QWEN_PROXY_URL: z.string().optional(),
 
       ENABLED_STEPFUN: z.boolean(),
       STEPFUN_API_KEY: z.string().optional(),
+      STEPFUN_PROXY_URL: z.string().optional(),
 
       ENABLED_BAICHUAN: z.boolean(),
       BAICHUAN_API_KEY: z.string().optional(),
@@ -103,9 +108,11 @@ export const getLLMConfig = () => {
 
       ENABLED_ZHIPU: !!process.env.ZHIPU_API_KEY,
       ZHIPU_API_KEY: process.env.ZHIPU_API_KEY,
+      ZHIPU_PROXY_URL: process.env.ZHIPU_PROXY_URL,
 
       ENABLED_DEEPSEEK: !!process.env.DEEPSEEK_API_KEY,
       DEEPSEEK_API_KEY: process.env.DEEPSEEK_API_KEY,
+      DEEPSEEK_PROXY_URL: process.env.DEEPSEEK_PROXY_URL,
 
       ENABLED_GOOGLE: !!process.env.GOOGLE_API_KEY,
       GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
@@ -121,6 +128,7 @@ export const getLLMConfig = () => {
 
       ENABLED_MINIMAX: !!process.env.MINIMAX_API_KEY,
       MINIMAX_API_KEY: process.env.MINIMAX_API_KEY,
+      MINIMAX_PROXY_URL: process.env.MINIMAX_PROXY_URL,
 
       ENABLED_MISTRAL: !!process.env.MISTRAL_API_KEY,
       MISTRAL_API_KEY: process.env.MISTRAL_API_KEY,
@@ -155,9 +163,11 @@ export const getLLMConfig = () => {
 
       ENABLED_QWEN: !!process.env.QWEN_API_KEY,
       QWEN_API_KEY: process.env.QWEN_API_KEY,
+      QWEN_PROXY_URL: process.env.QWEN_PROXY_URL,
 
       ENABLED_STEPFUN: !!process.env.STEPFUN_API_KEY,
       STEPFUN_API_KEY: process.env.STEPFUN_API_KEY,
+      STEPFUN_PROXY_URL: process.env.STEPFUN_PROXY_URL,
 
       ENABLED_BAICHUAN: !!process.env.BAICHUAN_API_KEY,
       BAICHUAN_API_KEY: process.env.BAICHUAN_API_KEY,

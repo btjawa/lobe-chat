@@ -51,10 +51,12 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       };
     }
     case ModelProvider.ZhiPu: {
-      const { ZHIPU_API_KEY } = getLLMConfig();
+      const { ZHIPU_API_KEY, ZHIPU_PROXY_URL } = getLLMConfig();
       const apiKey = apiKeyManager.pick(payload?.apiKey || ZHIPU_API_KEY);
+      const baseURL = payload?.endpoint || ZHIPU_PROXY_URL;
       return {
         apiKey,
+        baseURL,
       };
     }
     case ModelProvider.Google: {
@@ -69,9 +71,10 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
     case ModelProvider.Moonshot: {
       const { MOONSHOT_API_KEY, MOONSHOT_PROXY_URL } = getLLMConfig();
       const apiKey = apiKeyManager.pick(payload?.apiKey || MOONSHOT_API_KEY);
+      const baseURL = payload?.endpoint || MOONSHOT_PROXY_URL;
       return {
         apiKey,
-        baseURL: MOONSHOT_PROXY_URL,
+        baseURL,
       };
     }
     case ModelProvider.Bedrock: {
@@ -109,11 +112,12 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       return { apiKey, baseURL };
     }
     case ModelProvider.Minimax: {
-      const { MINIMAX_API_KEY } = getLLMConfig();
+      const { MINIMAX_API_KEY, MINIMAX_PROXY_URL } = getLLMConfig();
 
       const apiKey = apiKeyManager.pick(payload?.apiKey || MINIMAX_API_KEY);
+      const baseURL = payload?.endpoint || MINIMAX_PROXY_URL;
 
-      return { apiKey };
+      return { apiKey, baseURL };
     }
     case ModelProvider.Mistral: {
       const { MISTRAL_API_KEY } = getLLMConfig();
@@ -138,11 +142,12 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       return { apiKey };
     }
     case ModelProvider.DeepSeek: {
-      const { DEEPSEEK_API_KEY } = getLLMConfig();
+      const { DEEPSEEK_API_KEY, DEEPSEEK_PROXY_URL } = getLLMConfig();
 
       const apiKey = apiKeyManager.pick(payload?.apiKey || DEEPSEEK_API_KEY);
+      const baseURL = payload?.endpoint || DEEPSEEK_PROXY_URL;
 
-      return { apiKey };
+      return { apiKey, baseURL };
     }
     case ModelProvider.TogetherAI: {
       const { TOGETHERAI_API_KEY } = getLLMConfig();
@@ -159,18 +164,20 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       return { apiKey };
     }
     case ModelProvider.Qwen: {
-      const { QWEN_API_KEY } = getLLMConfig();
+      const { QWEN_API_KEY, QWEN_PROXY_URL } = getLLMConfig();
 
       const apiKey = apiKeyManager.pick(payload?.apiKey || QWEN_API_KEY);
+      const baseURL = payload?.endpoint || QWEN_PROXY_URL;
 
-      return { apiKey };
+      return { apiKey, baseURL };
     }
     case ModelProvider.Stepfun: {
-      const { STEPFUN_API_KEY } = getLLMConfig();
+      const { STEPFUN_API_KEY, STEPFUN_PROXY_URL } = getLLMConfig();
 
       const apiKey = apiKeyManager.pick(payload?.apiKey || STEPFUN_API_KEY);
+      const baseURL = payload?.endpoint || STEPFUN_PROXY_URL;
 
-      return { apiKey };
+      return { apiKey, baseURL };
     }
     case ModelProvider.Baichuan: {
       const { BAICHUAN_API_KEY } = getLLMConfig();

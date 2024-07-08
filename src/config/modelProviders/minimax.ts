@@ -45,6 +45,9 @@ const Minimax: ModelProviderCard = {
   checkModel: 'abab5.5s-chat',
   id: 'minimax',
   name: 'Minimax',
+  proxyUrl: {
+    placeholder: "https://api.minimax.chat/v1"
+  }
 };
 
 export default Minimax;

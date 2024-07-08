@@ -97,6 +97,9 @@ export function initializeWithClientStore(provider: string, payload: any) {
       break;
     }
     case ModelProvider.ZhiPu: {
+      providerOptions = {
+        baseURL: providerAuthPayload?.endpoint || undefined,
+      }
       break;
     }
     case ModelProvider.Google: {
@@ -106,6 +109,15 @@ export function initializeWithClientStore(provider: string, payload: any) {
       break;
     }
     case ModelProvider.Moonshot: {
+      providerOptions = {
+        baseURL: providerAuthPayload?.endpoint || undefined,
+      }
+      break;
+    }
+    case ModelProvider.Minimax: {
+      providerOptions = {
+        baseURL: providerAuthPayload?.endpoint || undefined,
+      }
       break;
     }
     case ModelProvider.Bedrock: {
@@ -128,6 +140,15 @@ export function initializeWithClientStore(provider: string, payload: any) {
       break;
     }
     case ModelProvider.Qwen: {
+      providerOptions = {
+        baseURL: providerAuthPayload?.endpoint || undefined,
+      }
+      break;
+    }
+    case ModelProvider.Stepfun: {
+      providerOptions = {
+        baseURL: providerAuthPayload?.endpoint || undefined,
+      }
       break;
     }
     case ModelProvider.Anthropic: {
@@ -147,6 +168,9 @@ export function initializeWithClientStore(provider: string, payload: any) {
       break;
     }
     case ModelProvider.DeepSeek: {
+      providerOptions = {
+        baseURL: providerAuthPayload?.endpoint || undefined,
+      }
       break;
     }
     case ModelProvider.OpenRouter: {

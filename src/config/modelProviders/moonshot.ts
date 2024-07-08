@@ -28,6 +28,9 @@ const Moonshot: ModelProviderCard = {
   checkModel: 'moonshot-v1-8k',
   id: 'moonshot',
   name: 'Moonshot',
+  proxyUrl: {
+    placeholder: "https://api.moonshot.cn/v1"
+  }
 };
 
 export default Moonshot;

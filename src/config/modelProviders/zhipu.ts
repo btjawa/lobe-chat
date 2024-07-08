@@ -59,6 +59,9 @@ const ZhiPu: ModelProviderCard = {
   checkModel: 'glm-4-flash',
   id: 'zhipu',
   name: 'ZhiPu',
+  proxyUrl: {
+    placeholder: "https://open.bigmodel.cn/api/paas/v4",
+  }
 };
 
 export default ZhiPu;
